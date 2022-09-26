@@ -1,0 +1,19 @@
+{
+  "name": "EigenTx",
+  "description": "Build with love from EigenPhi",
+  "version": "1.1",
+  "manifest_version": 3,
+  "host_permissions": [
+    "*://etherscan.io/*"
+  ],
+  "permissions": ["activeTab", "scripting", "tabs"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "/images/16.png",
+    "32": "/images/32.png",
+    "48": "/images/48.png",
+    "128": "/images/128.png"
+  }
+}
