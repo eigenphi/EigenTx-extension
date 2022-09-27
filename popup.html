@@ -4,8 +4,39 @@
     <link rel="stylesheet" href="button.css">
   </head>
   <body>
-    <button id="loadButton">Load Transfer Flow</button>
-    <button id="runButton">Open In EigenTx</button>
+    <div id="stage">
+      <div id="actions">
+        <a id="loadButton"><img class="hover" src="images/flowchart-hover.svg"><img class="normal" src="images/flowchart.svg">Load Transfer Flow Chart</a>
+        <a id="runButton"><img class="hover" src="images/analysis-hover.svg"><img class="normal" src="images/analysis.svg">Open In EigenTx</a>
+        <a id="aboutButton"><img class="hover" src="images/about-hover.svg"><img class="normal" src="images/about.svg">About EigenTx Extension</a>
+      </div>
+      <div id="chain-logos">
+        <div class="logo-wrap enable">
+          <a href="https://etherscan.io" target="_blank">
+            <img src="images/chain-logo/etherscan-logo-circle.svg" />
+          </a>
+        </div>
+
+        <div class="logo-wrap enable">
+          <a href="https://bscscan.com" target="_blank">
+            <img src="images/chain-logo/bscscan-logo-circle.svg" />
+          </a>
+        </div>
+        <div class="logo-wrap">
+        <img src="images/chain-logo/AVASCAN.svg" />
+        </div>
+        <div class="logo-wrap">
+          <img src="images/chain-logo/FTMscan.svg" />
+        </div>
+        <div class="logo-wrap">
+          <img src="images/chain-logo/HecoChain.svg" />
+        </div>
+        <div class="logo-wrap">
+          <img src="images/chain-logo/polygonscan.svg" />
+        </div>
+      </div>
+    </div>
+
     <script src="popup.js"></script>
   </body>
 </html>
