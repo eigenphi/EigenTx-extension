@@ -99,10 +99,9 @@ loadButton.addEventListener("click", async () => {
     });
     console.log(tab.id); 
   }else{
-    alert(`Load transfer flow chart only works in transaction page of blockchain explores.
+    alert(`Load transfer flow chart only works in transaction page of blockchain explorers.
 
     Go to pages like: https://etherscan.io/tx/0xa8df8a486213e6e7cfb6ade916d4753a2fb1731f78ff5d204246d316623e0711`)
-
   }
 });
 
