@@ -37,24 +37,28 @@ body {
   background: #f5f7fb;
 }
 #chain-logos {
-  margin-top: 30px;
+  margin-top: 20px;
   border-top: 1px dashed #ced4da;
-  padding: 30px 0;
-  padding-top: 20px;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-around;
 }
 
 #chain-logos .logo-wrap {
   display: inline-block;
   border-radius: 8px;
-  padding: 5px;
-  margin-right: 5px;
   border: 1px dashed #ced4da;
+  width: 30px;
+  height: 30px;
+  line-height: 28px;
+  text-align: center;
 }
 
 #chain-logos .logo-wrap.enable{
   background: #f5f7fb;
-  padding: 7px;
   border: none;
+  width: 32px;
+  height: 32px;
 }
 
 
@@ -62,6 +66,8 @@ body {
   width: 20px;
   height: 20px;
   opacity: 0.15;
+  vertical-align: middle;
+
 }
 
 #chain-logos .logo-wrap.enable img{
@@ -80,4 +86,12 @@ body {
 }
 #actions a:hover img.hover{
   display: inline-block
+}
+
+#privacy-wrap {
+  text-align: center;
+}
+#privacy-wrap a {
+  cursor: pointer;
+  color: #B5B5C3;
 }

@@ -22,7 +22,7 @@ loadButton.addEventListener("click", async () => {
             stage.classList.add('eigentx-stage')
             stage.classList.add('col-md-12')
 
-            const img  = document.createElement("img");
+            const img  = document.createElement("embed");
             img.src = "https://tx.eigenphi.io/analyseTransaction.svg?chain=ALL&tx="+txHash;
             img.className = 'eigentx-chart-pic'
 
@@ -118,6 +118,10 @@ runButton.addEventListener("click", async () => {
   }
 });
 
-aboutButton.addEventListener('click',() => {
+aboutButton.addEventListener('click', () => {
   chrome.tabs.create({url: 'https://github.com/eigenphi/EigenTx-extension'});
 } )
+
+privacyButton.addEventListener('click', () => {
+  chrome.tabs.create({url: 'https://github.com/eigenphi/EigenTx-extension/blob/main/PrivacyPolicy.md'});
+})
