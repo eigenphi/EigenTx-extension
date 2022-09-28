@@ -1,6 +1,6 @@
 # EigenTx extension - Add EigenTx transfer flow chart to your Etherscan transaction page
 
-Chrome Store: https://chrome.google.com/webstore/detail/eigentx/cnjahodgconpfmfjnihjoplepefhfmde
+Chrome Store: Reviewing by Google，will coming Soon
 
 Screenshot:
 
