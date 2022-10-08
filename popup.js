@@ -1,8 +1,16 @@
-
 loadButton.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   var tabUrl = tab.url;
-  let result = tabUrl.includes("https://etherscan.io/tx/", 0) || tabUrl.includes("https://bscscan.com/tx/");
+  let result = tabUrl.includes("https://etherscan.io/tx/", 0) || 
+               tabUrl.includes("https://bscscan.com/tx/") ||
+               tabUrl.includes("https://snowtrace.io/tx/") ||
+               tabUrl.includes("https://polygonscan.com/tx/") ||
+               tabUrl.includes("https://arbiscan.io/tx/") ||
+               tabUrl.includes("https://optimistic.etherscan.io/tx/") ||
+               tabUrl.includes("https://ftmscan.com/tx/") ||
+               tabUrl.includes("https://cronoscan.com/tx/")
+               ;
+
   if(result) {
     let txHash = (tabUrl+'').match(/(0x\w+)/)[0] ?? '';
     chrome.scripting.executeScript({
@@ -108,7 +116,16 @@ loadButton.addEventListener("click", async () => {
 runButton.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   var tabUrl = tab.url;
-  let result = tabUrl.includes("https://etherscan.io/tx/", 0) || tabUrl.includes("https://bscscan.com/tx/");
+  let result = tabUrl.includes("https://etherscan.io/tx/", 0) || 
+               tabUrl.includes("https://bscscan.com/tx/") ||
+               tabUrl.includes("https://snowtrace.io/tx/") ||
+               tabUrl.includes("https://polygonscan.com/tx/") ||
+               tabUrl.includes("https://arbiscan.io/tx/") ||
+               tabUrl.includes("https://optimistic.etherscan.io/tx/") ||
+               tabUrl.includes("https://cronoscan.com/tx/") ||
+               tabUrl.includes("https://ftmscan.com/tx/") ||
+               tabUrl.includes("https://cronoscan.com/tx/")
+               ;
   if(result) {
     let txHash = (tabUrl+'').match(/(0x\w+)/)[0] ?? '';
     var uri = "https://tx.eigenphi.io/analyseTransaction?chain=ALL&tx="+txHash;
