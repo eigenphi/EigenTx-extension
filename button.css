@@ -8,7 +8,7 @@ body {
   padding: 20px 10px;
   box-shadow: 0 0 10px 0 rgba(56,71,109,0.09);
   border-radius: 8px;
-  width: 246px;
+  width: 286px;
 }
 
 #actions a {
@@ -67,7 +67,6 @@ body {
   height: 20px;
   opacity: 0.15;
   vertical-align: middle;
-
 }
 
 #chain-logos .logo-wrap.enable img{
