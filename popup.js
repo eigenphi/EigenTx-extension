@@ -17,6 +17,7 @@ loadButton.addEventListener("click", async () => {
       target: { tabId: tab.id },
       func: (txHash) => {
         console.log(1)
+
         if(!document.querySelector('.eigentx-stage')){
           console.log(2, txHash)
 
@@ -27,7 +28,7 @@ loadButton.addEventListener("click", async () => {
           if(injectedDom){
 
             const stage = document.createElement('div');
-            stage.classList.add('eigentx-stage')
+            // stage.classList.add('eigentx-stage')
             stage.classList.add('col-md-12')
 
             const img  = document.createElement("embed");
@@ -38,6 +39,11 @@ loadButton.addEventListener("click", async () => {
             dividing.classList.add('eigentx-dividing');
             dividing.classList.add('hr-space');
             dividing.classList.add('my-4');
+
+            const descriptionRow = document.createElement('div');
+            descriptionRow.classList.add('row')
+            descriptionRow.classList.add('col-md-12')
+
 
             const dividing2 = document.createElement('hr');
             dividing2.classList.add('eigentx-dividing');
@@ -68,12 +74,109 @@ loadButton.addEventListener("click", async () => {
             }
             chartWrap.appendChild(img);
 
+
             stage.appendChild(dividing);
+            stage.appendChild(descriptionRow);
             openInEigenTxWrap.appendChild(openInEigenTx);
             stage.appendChild(openInEigenTxWrap);
             stage.appendChild(chartWrap)
             stage.appendChild(dividing2);
             injectedDom.appendChild(stage);
+
+            var x = new XMLHttpRequest();
+            x.open('GET', 'https://eigenphi.io/api/v1/dataservice/search/?chain=ethereum&q=' + txHash);
+            x.onload = function() {
+              console.log(4, x.responseText)
+              const respObj = JSON.parse(x.responseText)
+              console.log(5, respObj)
+
+              const descriptionRowTitle = document.createElement('div');
+              descriptionRowTitle.classList.add('col-md-3')
+              descriptionRowTitle.classList.add('font-weight-bold')
+              descriptionRowTitle.classList.add('font-weight-md-normal')
+              descriptionRowTitle.classList.add('mb-1')
+              descriptionRowTitle.classList.add('mb-md-0')
+              descriptionRowTitle.innerText = 'Transaction Description: '
+              
+              const descriptionRowValue = document.createElement('div');
+              descriptionRowValue.classList.add('col-md-9')
+
+              const descriptionRowLink = document.createElement('a');
+              descriptionRowLink.innerText = 'Open In EigenPhi.io'
+              descriptionRowLink.target = "_blank";
+              descriptionRowLink.href = "https://eigenphi.io/ethereum/tx/" + txHash
+
+              if(respObj['result'] != undefined &&
+                 respObj['result']['data'] != undefined &&
+                 respObj['result']['data'][0] != undefined &&
+                 respObj['result']['data'][0]['transaction'] != undefined &&
+                 respObj['result']['data'][0]['transaction']['type'] != undefined
+                ) {
+                console.log(6, respObj['result']);
+                var text = '';
+
+                var y = new XMLHttpRequest();
+                y.open('GET', 'https://eigenphi.io/api/v1/arbitrage/stat/txProfit/?chain=ethereum&tx_hash=' + txHash);
+                y.onload = function() {
+                  
+                  console.log(10, y.responseText)
+                  const profitObj = JSON.parse(y.responseText)
+
+                  
+                  if(respObj['result']['data'][0]['transaction']['type'] == 'Sandwich') {
+                    
+                    text += 'Partial of Sandwich MEV (role: ';
+                     
+                    if(respObj['result']['data'][0]['type'][1] == 'SandwichAttacker') {
+                      text += 'Attacker';
+                      text += '; profit: &asymp;$';
+                    } else if(respObj['result']['data'][0]['type'][1] == 'SandwichVictim') {
+                      text += 'Victim';
+                      text += '; loss: &asymp;$';
+                    }
+
+                    text += profitObj['result']['data']['profit'].toFixed(2);
+                    text += ')  ';
+                    console.log(11, text);
+                  } else if(respObj['result']['data'][0]['transaction']['type'] == 'Spatial' || 
+                    respObj['result']['data'][0]['transaction']['type'] == 'Triangular' || 
+                    respObj['result']['data'][0]['transaction']['type'] == 'Combination') {
+
+                    text += 'Arbitrage Transaction (profit: &asymp;$';
+                    text += profitObj['result']['data']['profit'].toFixed(2);
+                    text += '; via ';
+                    text += profitObj['result']['data']['tokenCount'];
+                    text += ' tokens and ';
+                    text += profitObj['result']['data']['lpCount'];
+                    text += ' venues)  ';
+                    console.log(12, text);
+                  } else {
+                    text = 'Not included in EigenPhi database';
+                  }
+
+                  descriptionRowValue.innerHTML = text;
+                  descriptionRowValue.appendChild(descriptionRowLink);
+                  descriptionRow.appendChild(descriptionRowTitle);
+                  descriptionRow.appendChild(descriptionRowValue);
+
+                };
+                y.send();
+
+
+
+              } else {
+                text = 'Not included in EigenPhi database';
+                console.log(7, "undefined");
+                  
+                descriptionRowValue.innerHTML = text;
+                descriptionRow.appendChild(descriptionRowTitle);
+                descriptionRow.appendChild(descriptionRowValue);
+
+              }
+              
+
+            };
+            x.send();
 
             const eigenTxStyle = document.createElement('style')
 
