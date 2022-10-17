@@ -203,6 +203,9 @@ loadButton.addEventListener("click", async () => {
                       text += profitObj['result']['data']['profit'].toFixed(2);
                       text += ')  ';
 
+
+                      descriptionRowLink.href = "https://eigenphi.io/ethereum/liquidation/tx/" + txHash;
+
                       descriptionRowValue.innerHTML = text;
                       descriptionRowValue.appendChild(descriptionRowLink);
                       descriptionRow.appendChild(descriptionRowTitle);
