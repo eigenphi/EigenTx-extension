@@ -4,6 +4,8 @@ Chrome Store: https://chrome.google.com/webstore/detail/eigentx/gmjkhhheaknfaeka
 
 EigenTx is a public-facing on-chain transaction visualization tool on various blockchains.  EigenTx aims to help you quickly understand the transfer flow details of any on-chain transactions. 
 
+In version 1.5, the extension loads the description of the current transaction from the EigenPhi database. More information could help you identify and understand "arbitrage," "sandwich," and “liquidation" types of transactions.
+
 In version 1.4, the extension supports users to load detailed token flow graphs on Etherscan (and many blockchain explorers, check details below) transaction pages based on any selected transaction, which will give you more insights into what the transaction does and how the transaction is operated. 
 
 By clicking "Load Transfer Flow Chart",  a chart will be loaded automatically under "value section" of the transaction page, which visualizes the "tokens transferred" section. 
