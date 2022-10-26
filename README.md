@@ -1,6 +1,35 @@
 # EigenTx extension - Add EigenTx transfer flow chart to your Etherscan transaction page
 
-Chrome Store: https://chrome.google.com/webstore/detail/eigentx/gmjkhhheaknfaekapfiedhohdilpmgci
+## Current verion 1.5
+Install from chrome Store: https://chrome.google.com/webstore/detail/eigentx/gmjkhhheaknfaekapfiedhohdilpmgci
+
+## Version change log
+
+### version 1.5
+26/10/2022
+EigenTx extension version 1.5 released! 
+- Add transaction description 
+  - Arbitrage
+  - Sandwich
+  - Liquidation
+- Fix bugs
+
+### version 1.4
+22/09/2022
+EigenTx extension version 1.4 released! 
+- Add support of Chains
+  - Ethereum (https://etherscan.io)
+  - BSC (https://bscscan.com)
+  - Avalanche (C chain, https://snowtrace.io)
+  - Polygon (https://polygonscan.com)
+  - Arbitrum (https://arbiscan.io)
+  - Optimism (https://optimistic.etherscan.io)
+  - Fantom (https://ftmscan.com)
+  - Cronos (https://cronoscan.com)
+- Relayout user interface
+- Fix bugs
+
+## Readme
 
 EigenTx is a public-facing on-chain transaction visualization tool on various blockchains.  EigenTx aims to help you quickly understand the transfer flow details of any on-chain transactions. 
 
