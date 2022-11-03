@@ -1,7 +1,7 @@
 {
   "name": "EigenTx",
-  "description": "Build with love from EigenPhi",
-  "version": "1.5",
+  "description": "Transaction visualization tool for various chains, which generates token flow chart to give you more insights into the transaction",
+  "version": "1.5.1",
   "manifest_version": 3,
   "permissions": ["scripting", "tabs"],
   "host_permissions": [
