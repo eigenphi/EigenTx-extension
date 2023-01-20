@@ -127,102 +127,119 @@ loadButton.addEventListener("click", async () => {
             fetch(
               `https://storage.googleapis.com/eigenphi-${chain}-tx/${txHash}`
             ).then((resp) => {
-              resp.json().then((json) => {
-                if (json && json.version === "v1.0.0") {
-                } else {
-                  if (json.summary) {
-                    const txType = json.summary.types[0];
-                    let epDesc = "Not included in EigenPhi database";
-                    if (txType === "Arbitrage") {
-                      epDesc = `Arbitrage Transaction (profit: &asymp;$${amount(
-                        json.summary.profit,
-                        2
-                      )}; via ${json.summary.tokenCount} tokens and ${
-                        json.summary.venueCount
-                      } venues) Open In EigenPhi.io`;
-
-                      addDesc(epDesc, txType);
-                    } else if (txType === "Liquidation") {
-                      Promise.all([
-                        fetch(`
+              resp
+                .json()
+                .then((json) => {
+                  if (json && json.version === "v1.0.0") {
+                  } else {
+                    if (json.summary) {
+                      const txType = json.summary.types[0];
+                      if (txType === "Arbitrage") {
+                        addDesc(
+                          `Arbitrage Transaction (profit: &asymp;$${amount(
+                            json.summary.profit,
+                            2
+                          )}; via ${json.summary.tokenCount} tokens and ${
+                            json.summary.venueCount
+                          } venues) `,
+                          txType
+                        );
+                      } else if (txType === "Liquidation") {
+                        Promise.all([
+                          fetch(`
                           https://us-west1-arbitragescan.cloudfunctions.net/dbview?path=/alpha/${chain}/labels/${json.summary.liquidationDetails[0].liquidatedAsset.tokenAddress}
                         `),
-                        fetch(`
+                          fetch(`
                           https://us-west1-arbitragescan.cloudfunctions.net/dbview?path=/alpha/${chain}/labels/${json.summary.liquidationDetails[0].debtAsset.tokenAddress}
                         `),
-                      ]).then(
-                        ([liquidatedTokenLabelResp, debtTokenLabelResp]) => {
-                          Promise.all([
-                            liquidatedTokenLabelResp.json(),
-                            debtTokenLabelResp.json(),
-                          ]).then(
-                            ([
-                              liquidatedTokenLabelJson,
-                              debtTokenLabelJson,
-                            ]) => {
-                              epDesc = `Liquidation Transaction (&asymp;$${amount(
-                                json.summary.liquidationDetails[0]
-                                  .liquidatedAsset.tokenVolume,
-                                2
-                              )} ${
-                                liquidatedTokenLabelJson.token.symbol
-                              } Liquidated, and &asymp;$${amount(
-                                json.summary.liquidationDetails[0].debtAsset
-                                  .tokenVolume,
-                                2
-                              )} ${debtTokenLabelJson.token.symbol} repaid at ${
-                                json.summary.liquidationDetails[0].protocol.name
-                              }${
-                                json.summary.liquidationDetails[0].protocol
-                                  .protocolVersion
-                              }; profit: &asymp;$${amount(
-                                json.summary.profit,
-                                2
-                              )}) Open In EigenPhi.io`;
-                              addDesc(epDesc, txType);
-                            }
-                          );
-                        }
-                      );
-                    }
-
-                    if (txType === "PartialSandwich") {
-                      const commonPool = json.tokenFlows.find(
-                        (item) =>
-                          item.tags && item.tags.includes("CommonTrader")
-                      );
-                      Promise.all([
-                        fetch(
-                          `https://storage.googleapis.com/eigenphi-${chain}-tx/${json.resultId}`
-                        ),
-                        fetch(
-                          `https://us-west1-arbitragescan.cloudfunctions.net/dbview?path=/alpha/${chain}/labels/${commonPool.address}`,
-                          {
-                            method: "GET",
-                            mode: "cors",
+                        ]).then(
+                          ([liquidatedTokenLabelResp, debtTokenLabelResp]) => {
+                            Promise.all([
+                              liquidatedTokenLabelResp.json(),
+                              debtTokenLabelResp.json(),
+                            ]).then(
+                              ([
+                                liquidatedTokenLabelJson,
+                                debtTokenLabelJson,
+                              ]) => {
+                                addDesc(
+                                  `Liquidation Transaction (&asymp;$${amount(
+                                    json.summary.liquidationDetails[0]
+                                      .liquidatedAsset.tokenVolume,
+                                    2
+                                  )} ${
+                                    liquidatedTokenLabelJson.token.symbol
+                                  } Liquidated, and &asymp;$${amount(
+                                    json.summary.liquidationDetails[0].debtAsset
+                                      .tokenVolume,
+                                    2
+                                  )} ${
+                                    debtTokenLabelJson.token.symbol
+                                  } repaid at ${
+                                    json.summary.liquidationDetails[0].protocol
+                                      .name
+                                  }${
+                                    json.summary.liquidationDetails[0].protocol
+                                      .protocolVersion
+                                  }; profit: &asymp;$${amount(
+                                    json.summary.profit,
+                                    2
+                                  )}) `,
+                                  txType
+                                );
+                              }
+                            );
                           }
-                        ),
-                      ]).then(([sandwichVirtualTxResp, commonLpLabelResp]) => {
+                        );
+                      } else if (txType === "PartialSandwich") {
+                        const commonPool = json.tokenFlows.find(
+                          (item) =>
+                            item.tags && item.tags.includes("CommonTrader")
+                        );
                         Promise.all([
-                          sandwichVirtualTxResp.json(),
-                          commonLpLabelResp.json(),
-                        ]).then(([sandwichVirtualTxJson, labelJson]) => {
-                          const lpName =
-                            (labelJson && labelJson.lp && labelJson.lp.name) ||
-                            "unknown";
+                          fetch(
+                            `https://storage.googleapis.com/eigenphi-${chain}-tx/${json.resultId}`
+                          ),
+                          fetch(
+                            `https://us-west1-arbitragescan.cloudfunctions.net/dbview?path=/alpha/${chain}/labels/${commonPool.address}`,
+                            {
+                              method: "GET",
+                              mode: "cors",
+                            }
+                          ),
+                        ]).then(
+                          ([sandwichVirtualTxResp, commonLpLabelResp]) => {
+                            Promise.all([
+                              sandwichVirtualTxResp.json(),
+                              commonLpLabelResp.json(),
+                            ]).then(([sandwichVirtualTxJson, labelJson]) => {
+                              const lpName =
+                                (labelJson &&
+                                  labelJson.lp &&
+                                  labelJson.lp.name) ||
+                                "unknown";
 
-                          epDesc = `Partial of Sandwich MEV (role: Attacker; profit: &asymp;$${amount(
-                            sandwichVirtualTxJson.summary.profit,
-                            2
-                          )}; common-pool: ${lpName}) Open In EigenPhi.io`;
-
-                          addDesc(epDesc, txType);
-                        });
-                      });
+                              addDesc(
+                                `Partial of Sandwich MEV (role: Attacker; profit: &asymp;$${amount(
+                                  sandwichVirtualTxJson.summary.profit,
+                                  2
+                                )}; common-pool: ${lpName}) `,
+                                txType
+                              );
+                            });
+                          }
+                        );
+                      } else {
+                        addDesc("Not included in EigenPhi database. ");
+                      }
+                    } else {
+                      addDesc("Not included in EigenPhi database. ");
                     }
                   }
-                }
-              });
+                })
+                .catch(() => {
+                  addDesc("Not included in EigenPhi database. ");
+                });
             });
 
             const eigenTxStyle = document.createElement("style");
