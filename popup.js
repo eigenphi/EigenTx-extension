@@ -112,12 +112,13 @@ loadButton.addEventListener("click", async () => {
               const descriptionRowLink = document.createElement("a");
               descriptionRowLink.innerText = "Open In EigenPhi.io";
               descriptionRowLink.target = "_blank";
-              descriptionRowLink.href =
-                "https://eigenphi.io/mev/" +
-                chain +
-                (txType === "Liquidation" ? "/liquidation" : "") +
-                "/tx/" +
-                txHash;
+              descriptionRowLink.href = {
+                unknown: `https://eigenphi.io/mev/eigentx/${txHash}`,
+                arbitrage: `https://eigenphi.io/mev/${chain}/tx/${txHash}`,
+                sandwich: `https://eigenphi.io/mev/${chain}/tx/${txHash}`,
+                liquidation: `https://eigenphi.io/mev/${chain}/liquidation/tx/${txHash}`,
+              }[txType.toLowerCase()];
+
               descriptionRowValue.innerHTML = text;
               descriptionRowValue.appendChild(descriptionRowLink);
               descriptionRow.appendChild(descriptionRowTitle);
@@ -224,21 +225,24 @@ loadButton.addEventListener("click", async () => {
                                   sandwichVirtualTxJson.summary.profit,
                                   2
                                 )}; common-pool: ${lpName}) `,
-                                txType
+                                "sandwich"
                               );
                             });
                           }
                         );
                       } else {
-                        addDesc("Not included in EigenPhi database. ");
+                        addDesc(
+                          "Not included in EigenPhi database. ",
+                          "unknown"
+                        );
                       }
                     } else {
-                      addDesc("Not included in EigenPhi database. ");
+                      addDesc("Not included in EigenPhi database. ", "unknown");
                     }
                   }
                 })
                 .catch(() => {
-                  addDesc("Not included in EigenPhi database. ");
+                  addDesc("Not included in EigenPhi database. ", "unknown");
                 });
             });
 
