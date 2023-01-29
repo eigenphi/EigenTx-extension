@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "watch": "cp -rf ./assets/* ./dist/ && parcel watch ./src/popup.html",
-    "build": "rm -rf ./dist && mkdir ./dist && cp -rf ./assets/* ./dist/ && parcel build ./src/popup.html"
+    "build": "rm -rf ./dist && mkdir ./dist && cp -rf ./assets/* ./dist/ && parcel build --no-optimize ./src/popup.html"
   },
   "devDependencies": {
     "@parcel/transformer-svg-react": "^2.8.3",
