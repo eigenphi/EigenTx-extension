@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "experimentalDecorators": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": "./src",
+    "moduleResolution": "node"
+  },
+  "include": ["src/*", "assets/*", "./typings"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
