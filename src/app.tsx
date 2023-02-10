@@ -98,8 +98,9 @@ export function App() {
 
                     const injectedDom =
                       document.querySelectorAll(
-                        ".row.align-items-center.mb-4"
-                      )[5] ||
+                        "#home-tab-content .row.mb-5"
+                      )[8] ||
+                      document.querySelectorAll("#home .row.mb-4")[10] ||
                       document.querySelectorAll(
                         ".row.align-items-center.mn-3"
                       )[1];
@@ -109,7 +110,7 @@ export function App() {
                     if (injectedDom) {
                       const stage = document.createElement("div");
                       stage.innerHTML = htmls;
-                      injectedDom.appendChild(stage);
+                      injectedDom.appendChild(stage.firstElementChild);
 
                       document.getElementById("eigentx-pic").onload =
                         function () {
@@ -286,7 +287,7 @@ export function App() {
                 text-align: right;
               }
               .eigentx-chart-pic {
-                width: 1342px;
+                width: 100%;
               }
               .eigentx-loading-prompt {
                 text-align: center;
