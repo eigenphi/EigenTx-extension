@@ -100,6 +100,7 @@ export function App() {
                       document.querySelectorAll(
                         "#home-tab-content .row.mb-5"
                       )[8] ||
+                      document.querySelectorAll("#home .row.mb-4")[10] ||
                       document.querySelectorAll(
                         ".row.align-items-center.mn-3"
                       )[1];
