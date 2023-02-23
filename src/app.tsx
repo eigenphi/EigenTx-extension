@@ -98,8 +98,8 @@ export function App() {
 
                     const injectedDom =
                       document.querySelectorAll(
-                        "#home-tab-content .row.mb-5"
-                      )[8] ||
+                        "#home-tab-content .card.p-5.mb-3"
+                      )[0] ||
                       document.querySelectorAll("#home .row.mb-4")[10] ||
                       document.querySelectorAll(
                         ".row.align-items-center.mn-3"
