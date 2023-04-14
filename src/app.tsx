@@ -98,16 +98,13 @@ export function App() {
 
                     const injectedDom =
                       document.querySelectorAll(
-                        ".row.align-items-center.mb-4"
-                      )[5] ||
-                      document.querySelectorAll(
-                        ".row.align-items-center.mn-3"
-                      )[1];
-
-                    // console.log(3, injectedDom)
+                        "#ContentPlaceHolder1_maintable .card"
+                      )[0] ||
+                      document.querySelectorAll("#myTabContent .tab-pane")[0];
 
                     if (injectedDom) {
                       const stage = document.createElement("div");
+                      stage.className = "eigentx-stage";
                       stage.innerHTML = htmls;
                       injectedDom.appendChild(stage);
 
@@ -129,7 +126,7 @@ export function App() {
                           text;
                         document
                           .getElementById("eigentx-link")
-                          .setAttribute("href", linkMap[type]);
+                          .setAttribute("href", linkMap[type.toLowerCase()]);
                       }
 
                       fetch(

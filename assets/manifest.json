@@ -6,9 +6,11 @@
   "permissions": ["scripting", "tabs"],
   "host_permissions": [
     "*://etherscan.io/*",
+    "*://www.etherscan.io/*",
     "*://storage.googleapis.com/*",
     "*://us-west1-arbitragescan.cloudfunctions.net/*",
     "*://bscscan.com/*",
+    "*://www.bscscan.com/*",
     "*://snowtrace.io/*",
     "*://polygonscan.com/*",
     "*://arbiscan.io/*",

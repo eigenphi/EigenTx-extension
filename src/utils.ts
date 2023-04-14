@@ -1,6 +1,8 @@
 export function parseTx(url: string) {
   const supportUrls = [
+    "https://www.etherscan.io/tx/",
     "https://etherscan.io/tx/",
+    "https://www.bscscan.com/tx/",
     "https://bscscan.com/tx/",
     "https://snowtrace.io/tx/",
     "https://polygonscan.com/tx/",

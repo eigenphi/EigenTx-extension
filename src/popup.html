@@ -4,6 +4,20 @@
     <meta charset="utf-8" />
     <title>My First Parcel App</title>
     <link href="./popup.css" rel="stylesheet" />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-WSCKQPGN00"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-WSCKQPGN00");
+    </script>
   </head>
   <body class="bg-slate-100">
     <script type="module" src="popup.tsx"></script>
