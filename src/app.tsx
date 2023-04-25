@@ -106,7 +106,7 @@ export function App() {
                       const stage = document.createElement("div");
                       stage.className = "eigentx-stage";
                       stage.innerHTML = htmls;
-                      injectedDom.appendChild(stage);
+                      injectedDom.appendChild(stage.firstElementChild);
 
                       document.getElementById("eigentx-pic").onload =
                         function () {
@@ -283,7 +283,7 @@ export function App() {
                 text-align: right;
               }
               .eigentx-chart-pic {
-                width: 1342px;
+                width: 100%;
               }
               .eigentx-loading-prompt {
                 text-align: center;
