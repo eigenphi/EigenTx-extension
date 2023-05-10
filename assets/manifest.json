@@ -9,12 +9,7 @@
       "matches": ["https://www.googletagmanager.com/*"]
     }
   ],
-  "permissions": [
-    "scripting",
-    "tabs",
-    "https://www.google-analytics.com/*",
-    "https://www.googletagmanager.com/*"
-  ],
+  "permissions": ["scripting", "tabs"],
   "content_scripts": [
     {
       "matches": [
