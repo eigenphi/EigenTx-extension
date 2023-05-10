@@ -28,24 +28,18 @@ export function App() {
                     <div className="col-md-9">
                       <span id="eigentx-desc"></span>
                       <a
-                        id="eigentx-link"
+                        className="eigenphi-link"
                         target={"_blank"}
-                        href={
-                          "https://tx.eigenphi.io/analyseTransaction?chain=ALL&tx=" +
-                          txHash
-                        }
+                        href={`https://eigenphi.io/mev/eigentx/${txHash}`}
                       >
                         Open In EigenPhi.io
                       </a>
                     </div>
                   </div>
-                  <div className="eigentx-openineigentx-wrap">
+                  <div className="eigentx-link eigentx-openineigentx-wrap">
                     <a
                       target={"_blank"}
-                      href={
-                        "https://tx.eigenphi.io/analyseTransaction?chain=ALL&tx=" +
-                        txHash
-                      }
+                      href={`https://eigenphi.io/mev/eigentx/${txHash}`}
                     >
                       Open In EigenTx
                     </a>
@@ -104,8 +98,8 @@ export function App() {
 
                     if (injectedDom) {
                       const stage = document.createElement("div");
-                      stage.className = "eigentx-stage";
                       stage.innerHTML = htmls;
+                      stage.firstElementChild.className = "eigentx-stage";
                       injectedDom.appendChild(stage.firstElementChild);
 
                       document.getElementById("eigentx-pic").onload =
@@ -124,9 +118,17 @@ export function App() {
                         };
                         document.getElementById("eigentx-desc").innerHTML =
                           text;
-                        document
-                          .getElementById("eigentx-link")
-                          .setAttribute("href", linkMap[type.toLowerCase()]);
+
+                        [].slice
+                          .call(
+                            document.getElementsByClassName("eigenphi-link")
+                          )
+                          .forEach((el) => {
+                            el.setAttribute(
+                              "href",
+                              linkMap[type.toLowerCase()]
+                            );
+                          });
                       }
 
                       fetch(
@@ -296,6 +298,11 @@ export function App() {
                       });
                       document.head.appendChild(eigenTxStyle);
                     }
+                  } else {
+                    document.querySelector(".eigentx-stage")?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "center",
+                    });
                   }
                 },
                 args: [txHash, tab.url + "", wrap.innerHTML],
@@ -320,13 +327,11 @@ export function App() {
             });
             const txHash = parseTx(tab.url + "");
             if (txHash) {
-              var uri =
-                "https://tx.eigenphi.io/analyseTransaction?chain=ALL&tx=" +
-                txHash;
+              var uri = `https://eigenphi.io/mev/eigentx/${txHash}`;
               chrome.tabs.create({ url: uri });
             } else {
               chrome.tabs.create({
-                url: "https://tx.eigenphi.io/analyseTransaction",
+                url: "https://eigenphi.io/mev/eigentx/",
               });
             }
           }}
