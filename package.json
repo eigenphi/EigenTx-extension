@@ -1,13 +1,13 @@
 {
   "name": "EigenTx",
-  "version": "1.5.7",
+  "version": "1.5.8",
   "description": "Transaction visualization tool for various chains, which generates token flow chart to give you more insights into the transaction",
   "repository": "git@github.com:eigenphi/EigenTx-extension.git",
   "author": "EigenPhi",
   "license": "MIT",
   "scripts": {
     "watch": "cp -rf ./assets/* ./dist/ && parcel watch ./src/popup.html",
-    "build": "rm -rf ./dist && mkdir ./dist && cp -rf ./assets/* ./dist/ && parcel build --no-optimize ./src/popup.html ./src/content.tsx"
+    "build": "rm -rf ./dist && mkdir ./dist && cp -rf ./assets/* ./dist/ && parcel build --no-optimize --no-source-maps ./src/popup.html ./src/content.tsx"
   },
   "devDependencies": {
     "@parcel/transformer-svg-react": "^2.8.3",
